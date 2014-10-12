@@ -38,7 +38,7 @@ class Canvas(object):
         if self.is_name_used(obj.name):
             raise Exception('The shape name is already used')
         for ref in obj.shapes:
-            if not Canvas.is_name_used(ref):
+            if not self.is_name_used(ref):
                 raise Exception('Unknown reference: {}'.format(ref))
         self.oa_store[obj.name] = obj
 
