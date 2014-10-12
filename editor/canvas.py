@@ -53,6 +53,22 @@ class Canvas(object):
         names = sorted(elems.keys())
         return '\n'.join([str(elems[name]) for name in names])
 
+    def move(self, args):
+        args = args.split(' ')
+        name = args[0]
+        try:
+            x = int(args[1])
+            y = int(args[2])
+        except ValueError:
+            print "#ERR\nWrong parameters"
+        else:
+            if name in self.oa_store:
+                self.oa_store[name].move(x, y)
+            elif name in self.elem_store:
+                self.elem_store[name].move(x, y)
+            else:
+                print "#ERR\nUnreference object"
+
     def clear(self):
         """Call `_clear_canvas`"""
         self._clear_canvas()

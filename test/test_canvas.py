@@ -124,3 +124,21 @@ class TestCanvas:
             assert_equals(len(self.canvas.oa_store), 1)
         finally:
             os.remove(filename)
+
+    def test_move(self):
+        self.canvas.add_element(Circle, 'circle 2 3 1')
+        self.canvas.move('circle 1 3')
+        assert_equals(self.canvas.elem_store['circle'].center.x, 3)
+        assert_equals(self.canvas.elem_store['circle'].center.y, 6)
+
+    def test_move_parsing_exception(self):
+        self.canvas.add_element(Circle, 'circle 2 3 1')
+        self.canvas.move('circle 1 two')
+        assert_equals(self.canvas.elem_store['circle'].center.x, 2)
+        assert_equals(self.canvas.elem_store['circle'].center.y, 3)
+
+    def test_move_parsing_exception(self):
+        self.canvas.add_element(Circle, 'circle 2 3 1')
+        self.canvas.move('foo 1 2')
+        assert_equals(self.canvas.elem_store['circle'].center.x, 2)
+        assert_equals(self.canvas.elem_store['circle'].center.y, 3)
