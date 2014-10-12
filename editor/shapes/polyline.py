@@ -6,6 +6,9 @@ class Polyline(GraphicalElement):
     """
     Store information about a Polyline
     """
+
+    header = 'PL'
+
     def __init__(self, *args, **kargs):
         values = args[0]
         if len(values) % 2 == 0:
@@ -25,7 +28,7 @@ class Polyline(GraphicalElement):
             self.points[:] = []
 
     def __repr__(self):
-        rep = 'PL {name} '.format(name=self.name)
+        rep = '{header} {name} '.format(name=self.name, header=self.header)
         return rep + ' '.join([str(p) for p in self.points])
 
     def move(self, x, y):

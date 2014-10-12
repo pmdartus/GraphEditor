@@ -1,15 +1,15 @@
 from polyline import Polyline
 
 
-class Line(Polyline):
+class Rectangle(Polyline):
     """
-    Store the state of a line
+    Store the state of a rectangle
     """
 
-    header = 'L'
+    header = 'R'
 
     def __init__(self, *args, **kargs):
         values = args[0]
-        if len(values) is not 5:
+        if len(values) is not 9:
             raise Exception('Wrong number of parameters')
-        super(Line, self).__init__(values)
+        super(Rectangle, self).__init__(values)
