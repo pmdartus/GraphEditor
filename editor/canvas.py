@@ -44,11 +44,13 @@ class Canvas(object):
 
     def list(self):
         """List existing shapes and agregated objects"""
+        print self.list_elem()
+
+    def list_elem(self):
         elems = self.elem_store.copy()
         elems.update(self.oa_store)
-        names = elems.keys()
-        for k in sorted(names):
-            print elems[k]
+        names = sorted(elems.keys())
+        return '\n'.join([str(elems[name]) for name in names])
 
     def clear(self):
         """Call `_clear_canvas`"""
@@ -73,9 +75,23 @@ class Canvas(object):
     def _remove_element(self, name):
         """Remove recursively all the needed elements"""
         if name in self.elem_store:
+            self._remove_element_references(name)
             del self.elem_store[name]
         elif name in self.oa_store:
-            for elem in self.oa_store[name]:
+            referenced_items = self.oa_store[name]
+            for elem in referenced_items.shapes:
+                self._remove_element_references(name)
                 self._remove_element(elem)
+            del self.oa_store[name]
         else:
             raise Exception('Unknown reference')
+
+    def _remove_element_references(self, name):
+        oa_to_delete = []
+        for key, group in self.oa_store.iteritems():
+            if name in group.shapes:
+                group.shapes.remove(name)
+            if len(group.shapes) == 0:
+                oa_to_delete.append(key)
+        for key in oa_to_delete:
+            del self.oa_store[key]
