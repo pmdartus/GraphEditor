@@ -19,23 +19,23 @@ class Canvas(object):
         try:
             obj = constructor(args)
             if isinstance(obj, ObjectAgregated):
-                self.add_agregated_object(obj)
+                self._add_agregated_object(obj)
             else:
-                self.add_shape(obj)
+                self._add_shape(obj)
         except Exception, e:
             print "ERR\n#{msg}".format(msg=e.message)
         else:
             print "OK\n#New object: {obj}".format(obj=obj)
 
-    def add_shape(self, shape):
+    def _add_shape(self, shape):
         """Add a shape in the canvas"""
-        if Canvas.is_name_used(shape.name):
+        if self.is_name_used(shape.name):
             raise Exception('The shape name is already used')
         self.elem_store[shape.name] = shape
 
-    def add_agregated_object(self, obj):
+    def _add_agregated_object(self, obj):
         """Add an agregated object in the canvas"""
-        if Canvas.is_name_used(obj.name):
+        if self.is_name_used(obj.name):
             raise Exception('The shape name is already used')
         for ref in obj.shapes:
             if not Canvas.is_name_used(ref):
@@ -52,7 +52,7 @@ class Canvas(object):
 
     def clear(self):
         """Call `_clear_canvas`"""
-        Canvas._clear_canvas()
+        self._clear_canvas()
         print 'OK'
 
     def remove_elements(self, args):
