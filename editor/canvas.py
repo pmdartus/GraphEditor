@@ -87,6 +87,7 @@ class Canvas(object):
             raise Exception('Unknown reference')
 
     def _remove_element_references(self, name):
+        """Remove in all the OA the referenced items"""
         oa_to_delete = []
         for key, group in self.oa_store.iteritems():
             if name in group.shapes:
@@ -95,3 +96,12 @@ class Canvas(object):
                 oa_to_delete.append(key)
         for key in oa_to_delete:
             del self.oa_store[key]
+
+    def save(self, filename):
+        """Save current canvas into a file"""
+        f = open(filename, "w")
+        ret = '\n'.join([str(elem) for elem in self.elem_store.itervalues()])
+        ret += '\n'
+        ret += '\n'.join([str(elem) for elem in self.oa_store.itervalues()])
+        f.write(ret)
+        f.close()

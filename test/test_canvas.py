@@ -1,3 +1,4 @@
+import os
 from nose.tools import assert_equals
 from nose.plugins.skip import SkipTest
 from editor.canvas import Canvas
@@ -97,3 +98,16 @@ class TestCanvas:
     def test_clear_empty_canvas(self):
         self.canvas.clear()
         assert_equals(len(self.canvas.elem_store), 0)
+
+    def test_save(self):
+        filename = 'test.txt'
+        ret = 'C circle2 2 3 1\nC circle1 2 3 1\nOA oa circle1'
+        self.canvas.add_element(Circle, 'circle1 2 3 1')
+        self.canvas.add_element(ObjectAgregated, 'oa circle1')
+        self.canvas.add_element(Circle, 'circle2 2 3 1')
+        try:
+            self.canvas.save(filename)
+            f = open(filename, 'r')
+            assert_equals(f.read(), ret)
+        finally:
+            os.remove(filename)

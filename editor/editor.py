@@ -6,35 +6,41 @@ from shapes.polyline import Polyline
 from shapes.object_agregated import ObjectAgregated
 from canvas import Canvas
 
+canvas = Canvas()
+
 
 class EditorPrompt(Cmd):
     def do_C(self, args):
         """Create a circle and add it into the canvas"""
-        Canvas.add_element(Circle, args)
+        canvas.add_element(Circle, args)
 
     def do_R(self, args):
         """Create a rectangle and add it into the canvas"""
-        Canvas.add_element(Rectangle, args)
+        canvas.add_element(Rectangle, args)
 
     def do_L(self, args):
         """Create a line and add it into the canvas"""
-        Canvas.add_element(Line, args)
+        canvas.add_element(Line, args)
 
     def do_PL(self, args):
         """Create a polyline and add it into the canvas"""
-        Canvas.add_element(Polyline, args)
+        canvas.add_element(Polyline, args)
 
     def do_OA(self, args):
         """Create a object agregated and add it into the canvas"""
-        Canvas.add_element(ObjectAgregated, args)
+        canvas.add_element(ObjectAgregated, args)
 
     def do_LIST(self, arg):
         """List all the existing objects in the canvas"""
-        Canvas.list()
+        canvas.list()
+
+    def do_SAVE(self, arg):
+        """Save the canvas in a file"""
+        canvas.save(arg)
 
     def do_CLEAR(self, arg):
         """Empty the canvas"""
-        Canvas.clear()
+        canvas.clear()
 
     def do_EXIT(self, arg):
         """Exit program"""
