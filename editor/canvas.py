@@ -112,7 +112,6 @@ class Canvas(object):
         self.clear()
         f = open(filename, "r")
         commands = f.read().split('\n')
-        print commands
         prompt = EditorPrompt(self)
         for cmd in commands:
             prompt.onecmd(cmd)
