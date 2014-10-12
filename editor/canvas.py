@@ -59,15 +59,18 @@ class Canvas(object):
         try:
             x = int(args[1])
             y = int(args[2])
-        except ValueError:
+            self._move(name, x, y)
+        except Exception:
             print "#ERR\nWrong parameters"
+
+    def _move(self, name, x, y):
+        if name in self.oa_store:
+            for child in self.oa_store[name].shapes:
+                self._move(child, x, y)
+        elif name in self.elem_store:
+            self.elem_store[name].move(x, y)
         else:
-            if name in self.oa_store:
-                self.oa_store[name].move(x, y)
-            elif name in self.elem_store:
-                self.elem_store[name].move(x, y)
-            else:
-                print "#ERR\nUnreference object"
+            print "#ERR\nUnreference object"
 
     def clear(self):
         """Call `_clear_canvas`"""

@@ -137,8 +137,18 @@ class TestCanvas:
         assert_equals(self.canvas.elem_store['circle'].center.x, 2)
         assert_equals(self.canvas.elem_store['circle'].center.y, 3)
 
-    def test_move_parsing_exception(self):
+    def test_move_unrefreenced_object(self):
         self.canvas.add_element(Circle, 'circle 2 3 1')
         self.canvas.move('foo 1 2')
         assert_equals(self.canvas.elem_store['circle'].center.x, 2)
         assert_equals(self.canvas.elem_store['circle'].center.y, 3)
+
+    def test_move_oa(self):
+        self.canvas.add_element(Circle, 'circle1 2 3 1')
+        self.canvas.add_element(Circle, 'circle2 0 0 1')
+        self.canvas.add_element(ObjectAgregated, 'oa circle1 circle2')
+        self.canvas.move('oa 1 2')
+        assert_equals(self.canvas.elem_store['circle1'].center.x, 3)
+        assert_equals(self.canvas.elem_store['circle1'].center.y, 5)
+        assert_equals(self.canvas.elem_store['circle2'].center.x, 1)
+        assert_equals(self.canvas.elem_store['circle2'].center.y, 2)
