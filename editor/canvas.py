@@ -1,4 +1,5 @@
 from shapes.object_agregated import ObjectAgregated
+from command_parser import EditorPrompt
 
 
 class Canvas(object):
@@ -105,3 +106,13 @@ class Canvas(object):
         ret += '\n'.join([str(elem) for elem in self.oa_store.itervalues()])
         f.write(ret)
         f.close()
+
+    def load(self, filename):
+        """Load in memory the file"""
+        self.clear()
+        f = open(filename, "r")
+        commands = f.read().split('\n')
+        print commands
+        prompt = EditorPrompt(self)
+        for cmd in commands:
+            prompt.onecmd(cmd)

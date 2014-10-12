@@ -111,3 +111,16 @@ class TestCanvas:
             assert_equals(f.read(), ret)
         finally:
             os.remove(filename)
+
+    def test_load(self):
+        filename = 'test.txt'
+        ret = 'C circle2 2 3 1\nC circle1 2 3 1\nOA oa circle1'
+        f = open(filename, 'w')
+        f.write(ret)
+        f.close()
+        try:
+            self.canvas.load(filename)
+            assert_equals(len(self.canvas.elem_store), 2)
+            assert_equals(len(self.canvas.oa_store), 1)
+        finally:
+            os.remove(filename)
