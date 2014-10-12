@@ -23,7 +23,9 @@ class Circle(GraphicalElement):
             raise Exception('Invalid argument')
 
     def __del__(self):
-        del self.center
+        has_center = hasattr(self, 'center')
+        if has_center is not False:
+            del self.center
 
     def __repr__(self):
         return "C {self.name} {self.center} {self.radius}".format(self=self)

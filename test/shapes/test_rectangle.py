@@ -4,9 +4,9 @@ from editor.shapes.rectangle import Rectangle
 
 class TestRectangle:
     def test_polyline_creation(self):
-        r = Rectangle(['rect', '1', '3', '9', '2', '2', '2', '3', '4'])
+        r = Rectangle(['rect', '1', '3', '9', '2'])
         assert_equals(r.name, 'rect')
-        assert_equals(len(r.points), 4)
+        assert_equals(len(r.points), 2)
 
     def test_wrong_nb_params(self):
         assert_raises(
@@ -15,5 +15,5 @@ class TestRectangle:
         )
 
     def test_repr(self):
-        l = Rectangle(['rect', '1', '3', '9', '2', '2', '2', '3', '4'])
-        assert_equals(str(l), 'R rect 1 3 9 2 2 2 3 4')
+        l = Rectangle(['rect', '1', '3', '9', '2'])
+        assert_equals(str(l), 'R rect 1 3 9 2')
