@@ -35,6 +35,10 @@ class EditorPrompt(Cmd):
         """List all the existing objects in the canvas"""
         self.canvas.list()
 
+    def do_MOVE(self, arg):
+        """List all the existing objects in the canvas"""
+        self.canvas.move(arg)
+
     def do_SAVE(self, arg):
         """Save the canvas in a file"""
         self.canvas.save(arg)
