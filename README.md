@@ -1,5 +1,6 @@
 #GraphEditor
 [![Build Status](https://travis-ci.org/pmdartus/GraphEditor.svg?branch=master)](https://travis-ci.org/pmdartus/GraphEditor)
+[![Coverage Status](https://coveralls.io/repos/pmdartus/GraphEditor/badge.png?branch=master)](https://coveralls.io/r/pmdartus/GraphEditor?branch=master)
 
 Simple graphic editor CLI to learn python
 
