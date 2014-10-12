@@ -20,6 +20,12 @@ class TestPolyline:
             lambda: Polyline(['polyline', '1', '3', '9', '2', '2'])
         )
 
+    def test_parse_error(self):
+        assert_raises(
+            Exception,
+            lambda: Polyline(['polyline', 'one', '3', '9', '2', '2', '4'])
+        )
+
     def test_move(self):
         pl = Polyline(['polyline', '1', '3', '9', '2', '2', '9'])
         pl.move(1, 2)

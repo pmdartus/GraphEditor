@@ -23,6 +23,12 @@ class TestCircle:
             lambda: Circle(['test_circle', '-1', '3', '-9'])
         )
 
+    def test_nb_params(self):
+        assert_raises(
+            Exception,
+            lambda: Circle(['test_circle', '-1', '3'])
+        )
+
     def test_move(self):
         c = Circle(['test_circle', '1', '3', '9'])
         c.move(1, 5)
